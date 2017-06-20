@@ -1,0 +1,52 @@
+
+version: '2'
+
+services:
+
+  hydra:
+    image: oryd/hydra:v0.8.4
+    links:
+      - postgresd:postgresd
+    volumes:
+      - hydravolume:/root
+    ports:
+      - "4444:4444"
+      - "4445:4445"
+    environment:
+      LOG_LEVEL: fatal
+      DOCKER_IP: 35.158.50.123
+      SYSTEM_SECRET: itsasuperrandomstringsamant
+      CONSENT_URL: http://35.158.50.123:3000/consent
+      DATABASE_URL: postgres://hydra:password@postgresd:5432/hydra?sslmode=disable
+      FORCE_ROOT_CLIENT_CREDENTIALS: admin:password
+      ACCESS_TOKEN_LIFESPAN: ${ACCESS_TOKEN_LIFESPAN}
+      ID_TOKEN_LIFESPAN: ${ID_TOKEN_LIFESPAN}
+      AUTHORIZE_CODE_LIFESPAN: ${AUTHORIZE_CODE_LIFESPAN}
+    restart: unless-stopped
+    entrypoint: sh -c "/go/bin/hydra migrate sql postgres://hydra:password@postgresd:5432/hydra?sslmode=disable && /go/bin/hydra host --dangerous-auto-logon --dangerous-force-http"
+
+  gamestreamconsent:
+    environment:
+      - HYDRA_URL=http://35.158.50.123:4444
+      - HYDRA_CLIENT_ID=admin
+      - HYDRA_CLIENT_SECRET=password
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    build: .
+    image: gamestreamconsent
+    links:
+      - hydra
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  postgresd:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=hydra
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=hydra
+volumes:
+  hydravolume:
+    driver: local
