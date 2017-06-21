@@ -21,13 +21,13 @@ const redir = process.env.DEFAULT_REDIRECT_URL
 // This is a mock object for the user. Usually, you would fetch this from, for example, mysql, or mongodb, or somewhere else.
 // The data is arbitrary, but will require a unique user id.
 const user = {
-  email: 'dan@acme.com',
-  password: 'secret',
+  email: 'andron@student.aau.dk',
+  password: 'Samant',
 
   email_verified: true,
-  user_id: 'user:12345:dandean',
-  name: 'Dan Dean',
-  nickname: 'Danny',
+  user_id: 'user:12345:andron',
+  name: 'And Ron',
+  nickname: 'Andron',
 }
 
 // This get's executed when we want to tell hydra that the user is authenticated and that he authorized the application
@@ -105,6 +105,15 @@ router.get('/login', (r, w) => {
 })
 
 router.get('/callback', (r, w) => {
+  var ob = {
+  "iss": "http://gamestreaming.fotosold.com",
+  "sub": "user:12345:andron",
+  "aud": "s6BhdRkqt3",
+  "nonce": "n-0S6_WzA2Mj",
+  "exp": 1311281970,
+  "iat": 1311280970
+};
+
   w.render('callback', { error: r.query.error, user, challenge: r.query.challenge })
 })
 
