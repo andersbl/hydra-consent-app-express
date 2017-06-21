@@ -113,8 +113,7 @@ router.get('/callback', (r, w) => {
   "exp": 1311281970,
   "iat": 1311280970
 };
-
-  w.render('callback', { error: r.query.error, user, challenge: r.query.challenge })
+  w.render('callback', {error: r.query.error, json: ob })
 })
 
 router.post('/login', (r, w) => {

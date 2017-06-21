@@ -1,9 +1,9 @@
 doctype html
 html
-    head
-        callback
-    body(style="text-align: center")
-        h1 The callback 
- 		each thing in json
-        	p= thing
-        
+	head
+		callback
+	body(style="text-align: center")
+		h1 The callback
+		each value, key in json
+			h4=key
+			p=value
