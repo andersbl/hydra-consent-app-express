@@ -11,6 +11,7 @@ const routes = require('./routes/index')
 
 const app = express()
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))

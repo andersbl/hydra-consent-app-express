@@ -1,9 +1,11 @@
 doctype html
 html
     head
+        link(href='css/comon.css', rel='stylesheet')
         title Please log in
     body(style="text-align: center")
-        h1 Please log in
+        img(src='img/flat-avatar.png')
+        h1 GameStreaming
         if error
             p.
                 #{error}
@@ -11,13 +13,12 @@ html
             table(style="margin: 0 auto;")
                 tr
                     td
-                        input(type="email",name="email",placeholder="email@foobar.com")
-                    td.
-                        (it's "#{user.email}")
+                        input(class="anders input-underline input-lg " type="email",name="email",placeholder="Email")
                 tr
                     td
-                        input(type="password",name="password")
-                    td.
-                        (it's "#{user.password}")
+                        input(class="anders input-underline input-lg " type="password",name="password" , placeholder="Password")
             input(type="hidden",name="challenge",value=challenge)
-            input(type="submit",value="Log in")
+            input(type="submit", class="button",value="Log in", style="margin: 40px;")
+            p.
+                (it's "#{user.password}")
+                (it's "#{user.email}")
