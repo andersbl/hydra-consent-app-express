@@ -4,5 +4,9 @@ html
         callback
     body(style="text-align: center")
         h1 The callback 
- 	p !{json}
+ 		p !{json}
+   		p !{json.result}
+   		p ---
+    		each val, key in json
+     			p #{key}: #{val}
         
