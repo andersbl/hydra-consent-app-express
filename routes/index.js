@@ -104,6 +104,10 @@ router.get('/login', (r, w) => {
   w.render('login', { error: r.query.error, user, challenge: r.query.challenge })
 })
 
+router.get('/callback', (r, w) => {
+  w.render('callback', { error: r.query.error, user, challenge: r.query.challenge })
+})
+
 router.post('/login', (r, w) => {
   const form = r.body
   if (form.email !== user.email || form.password !== user.password) {
