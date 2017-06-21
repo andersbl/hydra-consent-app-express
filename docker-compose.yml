@@ -16,7 +16,7 @@ services:
       LOG_LEVEL: fatal
       DOCKER_IP: 35.158.50.123
       SYSTEM_SECRET: itsasuperrandomstringsamant
-      CONSENT_URL: http://35.158.50.123:3000/consent
+      CONSENT_URL: https://gamestreaming.fotosold.com:3000/consent
       DATABASE_URL: postgres://hydra:password@postgresd:5432/hydra?sslmode=disable
       FORCE_ROOT_CLIENT_CREDENTIALS: admin:password
       ACCESS_TOKEN_LIFESPAN: ${ACCESS_TOKEN_LIFESPAN}
@@ -37,6 +37,7 @@ services:
       - hydra
     ports:
       - "3000:3000"
+      - "3001:3001"
     restart: unless-stopped
 
   postgresd:

@@ -11,6 +11,22 @@ const routes = require('./routes/index')
 
 const app = express()
 
+
+//const https = require('https');
+//const fs = require('fs');
+
+//const options = {
+//  hostname: 'gamestreaming.fotosold.com',
+//  port: 3001,
+//  path: '/',
+//  method: 'GET',
+//  key: fs.readFileSync('key.pem'),
+//  cert: fs.readFileSync('cert.pem')
+//};
+
+//https.createServer(options, app);
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
